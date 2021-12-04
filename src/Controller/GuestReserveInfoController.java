@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import DB.CancelTx;
 import DB.GuestDB;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -64,12 +65,14 @@ public class GuestReserveInfoController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         
     	GuestDB ld = new GuestDB();
+    	CancelTx TX = new CancelTx();
     	String id = IntroViewController.getField;
     	int g_key = ld.getguestkey(id);
     	btn_cancel.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-			
+				
+				TX.getCost(g_key);
 				ld.cancel_res(g_key);
 			}
 		});
