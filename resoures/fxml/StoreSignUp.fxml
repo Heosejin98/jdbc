@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="guestsignup_stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="1025.0" style="-fx-background-color: rgb(255, 255, 255);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StoreSignUpController">
+   <children>
+      <Label layoutX="23.0" layoutY="22.0" prefHeight="62.0" prefWidth="167.0" text="Waiter ">
+         <font>
+            <Font name="Monotype Corsiva" size="50.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_goback" layoutX="912.0" layoutY="14.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="98.0" style="-fx-background-color: rgb(0,153,255);" stylesheets="@../styles/button.css" text="뒤로 가기" textFill="WHITE" />
+      <TextField fx:id="field_store_signupid" layoutX="377.0" layoutY="147.0" prefHeight="26.0" prefWidth="280.0" promptText="ID를 입력해주세요" stylesheets="@../styles/textfield.css" />
+      <Button fx:id="btn_store_signup" layoutX="371.0" layoutY="455.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="399.0" style="-fx-background-color: rgb(0,153,255);" stylesheets="@../styles/button.css" text="SING UP" textFill="WHITE" />
+      <PasswordField fx:id="field_store_signuppw" layoutX="377.0" layoutY="188.0" prefHeight="23.0" prefWidth="280.0" promptText="PW를 입력해주세요" stylesheets="@../styles/textfield.css" />
+      <PasswordField fx:id="field_store_signuppwcheck" layoutX="377.0" layoutY="228.0" prefHeight="23.0" prefWidth="280.0" promptText="PW를 다시 입력해주세요" stylesheets="@../styles/textfield.css" />
+      <TextField fx:id="field_store_signupname" layoutX="377.0" layoutY="267.0" prefHeight="26.0" prefWidth="280.0" promptText="성함을 입력하세요" stylesheets="@../styles/textfield.css" />
+      <TextField fx:id="field_store_signupaddress" layoutX="377.0" layoutY="308.0" prefHeight="26.0" prefWidth="280.0" promptText="주소를 입력하세요" stylesheets="@../styles/textfield.css" />
+      <TextField fx:id="field_store_signuptel" layoutX="377.0" layoutY="348.0" prefHeight="26.0" prefWidth="280.0" promptText="'-'를 제외한 번호를 입력하세요" stylesheets="@../styles/textfield.css" />
+      <Button fx:id="btn_store_idcheck" layoutX="669.0" layoutY="149.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0" style="-fx-background-color: rgb(0,153,255);" stylesheets="@../styles/button.css" text="ID_CHECK" textFill="WHITE" />
+      <Label layoutX="344.0" layoutY="148.0" prefHeight="23.0" prefWidth="27.0" text="ID">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="332.0" layoutY="188.0" prefHeight="23.0" prefWidth="35.0" text="PW">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="228.0" prefHeight="23.0" prefWidth="98.0" text="PW CHECK">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="303.0" layoutY="308.0" prefHeight="23.0" prefWidth="65.0" text="Address">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="339.0" layoutY="348.0" prefHeight="23.0" prefWidth="27.0" text="Tel">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="369.0" layoutY="121.0" orientation="VERTICAL" prefHeight="313.0" prefWidth="5.0" />
+      <Label layoutX="318.0" layoutY="268.0" prefHeight="23.0" prefWidth="49.0" text="Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="field_store_signupmoney" layoutX="377.0" layoutY="388.0" prefHeight="26.0" prefWidth="280.0" promptText="입금할 금액을 입력하세요" stylesheets="@../styles/textfield.css" />
+      <Label layoutX="299.0" layoutY="390.0" prefHeight="23.0" prefWidth="66.0" text="Balance">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

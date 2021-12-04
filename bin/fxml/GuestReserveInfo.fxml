@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="guestreserveinfo_stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="814.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GuestReserveInfoController">
+   <children>
+      <Text fx:id="ReservationText" layoutX="55.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="예약 정보" wrappingWidth="95.66666603088379">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="ReservationImg" fitHeight="27.0" fitWidth="32.0" layoutX="23.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/reservation.JPG" />
+         </image>
+      </ImageView>
+      <Text fx:id="ReservationText2" layoutX="44.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="주문 메뉴" wrappingWidth="95.66666603088379">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ListView fx:id="list_reservationmenu" layoutX="21.0" layoutY="276.0" prefHeight="169.0" prefWidth="354.0" />
+      <ImageView fx:id="ReservationImg2" fitHeight="27.0" fitWidth="32.0" layoutX="393.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Downloads/Waiter-main/Waiter-main/src/main/resources/fxml/대기.JPG" />
+         </image>
+      </ImageView>
+      <Separator layoutX="407.0" layoutY="-162.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="6.0" rotate="90.0" />
+      <Label fx:id="label_store" layoutX="113.0" layoutY="69.0" prefHeight="27.0" prefWidth="151.0" />
+      <Label layoutX="23.0" layoutY="68.0" text="StoreName : ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="58.0" layoutY="103.0" text="DATE : ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="58.0" layoutY="138.0" text="TIME :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="label_date" layoutX="122.0" layoutY="102.0" prefHeight="27.0" prefWidth="151.0" />
+      <Label fx:id="label_time" layoutX="113.0" layoutY="140.0" prefHeight="27.0" prefWidth="151.0" />
+      <Text fx:id="ReservationText1" layoutX="409.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="예약 취소" wrappingWidth="95.66666603088379">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_cancel" layoutX="694.0" layoutY="415.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: rgb(0,153,255);" stylesheets="@../styles/button.css" text="취소하기" textFill="WHITE" />
+   </children>
+</AnchorPane>
