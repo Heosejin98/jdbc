@@ -384,14 +384,12 @@ public class GuestDB extends DTO {
 			
 			
 			conn = DriverManager.getConnection(Uri, Id, Pw);
-			sql = "insert into review(stokey, id, post, ratings) "
-					+ "values(?, ?, ?, ?)";
-			st = conn.prepareStatement(sql);
-			st.setInt(1, s_key);	
-			st.setString(2, id);
-			st.setString(3, post);
-			st.setInt(4, rating);
-			rs = st.executeQuery();
+			cstmt = conn.prepareCall("{call 리뷰작성(?, ?, ?, ?)}");
+			cstmt.setInt(1, s_key);
+			cstmt.setString(2, id);
+			cstmt.setString(3, post);
+			cstmt.setInt(4, rating);
+			cstmt.executeQuery();
 			
 			PreparedStatement pstmt2 = conn.prepareStatement("update order_t set check_key = 3 "
 					+ "where sto_KEY = ? and guest_key = ?");
@@ -405,5 +403,65 @@ public class GuestDB extends DTO {
 			System.out.println("리뷰 등록 실패" + e);
 		}
 	}
+	
+	public String get_coin(String id) {
+		String price = ""; // parameter
+		try {
+			sql = "select coin from guest where id = ?";
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			st = conn.prepareStatement(sql);
 
+			st.setString(1, id);
+			rs = st.executeQuery();
+			rs.next();
+			price = Integer.toString(rs.getInt(1));
+			closeDB();
+		} catch (SQLException e) {
+			System.out.println("코인 가져오기 실패" + e);
+		}
+
+		return price;
+
+	}
+	
+	public String get_point(String id) {
+		String price = ""; // parameter
+		try {
+			sql = "select point from guest where id = ?";
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			st = conn.prepareStatement(sql);
+
+			st.setString(1, id);
+			rs = st.executeQuery();
+			rs.next();
+			price = Integer.toString(rs.getInt(1));
+			closeDB();
+		} catch (SQLException e) {
+			System.out.println("포인트 가져오기 실패" + e);
+		}
+
+		return price;
+
+	}
+	
+	public String get_mebership(String id) {
+		String price = ""; // parameter
+		try {
+			sql = "select membership from guest where id = ?";
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			st = conn.prepareStatement(sql);
+
+			st.setString(1, id);
+			rs = st.executeQuery();
+			rs.next();
+			price = rs.getString(1);
+			closeDB();
+		} catch (SQLException e) {
+			System.out.println("포인트 가져오기 실패" + e);
+		}
+
+		return price;
+
+	}
 }
+

@@ -101,23 +101,27 @@ public class GuestReviewController implements Initializable{
     btn_Reviewwrite.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-               
+
             	 Review= textarea1_review.getText();	
             	 gd.signUpreview(s_key, id, Review, score, g_key);
-            	 
+            	 	
+            	 	//내용 갱신
             		ObservableList<String>  R_List= FXCollections.observableArrayList(); // 배열화
             		List<String> Review_List = new ArrayList<>();
                 	Review_List = gd.getReviewStoreNameList(g_key);
             		for (int i = 0; i < Review_List.size(); i++) {
             			R_List.add(Review_List.get(i));
             		}
+            		
             		list_reviewstorename.setItems(R_List);
-                    
-              
-        
+            		StoreScore.selectToggle(null);
+            		textarea1_review.clear();
+            		label_reviewstorename.setText("");	
+   
             }
         });
     
+
      list_reviewstorename.setOnMouseClicked(new EventHandler<MouseEvent>() {  //리스트뷰 클릭 시 메뉴이름 텍스트박스에 출력
                 @Override
                 public void handle(MouseEvent event) {

@@ -82,6 +82,38 @@ public class sub {
 
 	}
 	
+	// 코인 띄우기
+	public static Label coin_label_set(String id, Label lable) {
+		GuestDB gd = new GuestDB();
+		String ID = id;
+		
+		lable.setText("COIN : " + gd.get_coin(ID));
+		return lable;
+
+	}
+	
+	// 포인트 띄우기
+	public static Label point_set(String id, Label lable) {
+		GuestDB gd = new GuestDB();
+		String ID = id;
+		
+		lable.setText("POINT : " + gd.get_point(ID));
+		return lable;
+
+	}
+	
+	// 포인트 띄우기
+		public static Label membership_set(String id, Label lable) {
+			GuestDB gd = new GuestDB();
+			String ID = id;
+			
+			lable.setText("MEMBERSHIP : " + gd.get_mebership(ID));
+			return lable;
+
+		}
+		
+	
+	
 	//최대 수용 인원 띄우기
 	public static Label timemax_set(int s_key, Label lable) {
 		GuestDB gd = new GuestDB();

@@ -78,6 +78,7 @@ public class GuestReserveController implements Initializable {
 	private Label label_timemax;
 	@FXML
 	private Label label_current;
+	
 	@FXML
 	private ListView<String> list_showscore;
 
@@ -178,6 +179,10 @@ public class GuestReserveController implements Initializable {
 					System.out.println("gKey"+ g_key + "s_key" + s_key);
 				}
 				sub.setWindow("예약이 완료되었습니다");
+				
+				String id = IntroViewController.getField;
+				
+			
 			}
 		});
 

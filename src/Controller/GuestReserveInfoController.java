@@ -42,7 +42,7 @@ import javafx.event.EventHandler;
  *
  * @author 허세진
  */
-public class GuestReserveInfoController implements Initializable{
+public class GuestReserveInfoController extends GuestMainViewController implements Initializable{
     
     @FXML
     private Button btn_cancel;
@@ -80,6 +80,7 @@ public class GuestReserveInfoController implements Initializable{
     	int s_key = gd.storekey_val(g_key);
     	int ordnum = sd.get_ord_num(s_key, g_key);
     	List<OrderInfoList> Store_List = new ArrayList<>();
+    	
     
     	System.out.println(g_key);
     	System.out.println(s_key);
@@ -100,12 +101,17 @@ public class GuestReserveInfoController implements Initializable{
 		}
 		list_reservationmenu.setItems(MenuList);
 		
+		
+		//에약 취소
     	btn_cancel.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				
 				TX.getCost(g_key);
 				gd.cancel_res(g_key);
+	
+					
+				
 			}
 		});
         

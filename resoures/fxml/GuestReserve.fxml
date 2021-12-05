@@ -38,7 +38,7 @@
          </font>
       </Text>
       <Button fx:id="btn_guest_menuorder" layoutX="717.0" layoutY="431.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: rgb(0,153,255);" stylesheets="@../styles/button.css" text="주문하기" textFill="WHITE" />
-      <Label fx:id="label_totalprice" layoutX="600.0" layoutY="435.0" prefHeight="24.0" prefWidth="112.0" text="총 : 0원">
+      <Label fx:id="label_totalprice" layoutX="553.0" layoutY="434.0" prefHeight="24.0" prefWidth="162.0" text="총 : 0원">
          <font>
             <Font size="20.0" />
          </font>

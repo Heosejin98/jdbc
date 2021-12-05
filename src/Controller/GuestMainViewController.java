@@ -31,7 +31,13 @@ public class GuestMainViewController implements Initializable {
 	@FXML
 	private Button btn_logout;
 	@FXML
-	private Label label_guestname;
+	public Label label_guestname;
+	@FXML 
+	public Label label_point;
+	@FXML 
+	public Label label_coin;
+	@FXML
+	public Label label_membership;
 	@FXML
 	private AnchorPane guestempty_stage;
 	@FXML
@@ -44,12 +50,18 @@ public class GuestMainViewController implements Initializable {
 	private AnchorPane sub_stage;
 	@FXML
 	private AnchorPane third_stage;
-
+	@FXML
+	private Button btn_re;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
-		sub.username_set(IntroViewController.getField, label_guestname);
-
+		String id = IntroViewController.getField;
+		
+		sub.username_set(id, label_guestname);
+		sub.coin_label_set(id, label_coin);
+		sub.point_set(id, label_point);
+		sub.membership_set(id, label_membership);
+		
 		btn_go_reserve.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -62,6 +74,16 @@ public class GuestMainViewController implements Initializable {
 				}
 
 				sub_stage.getChildren().add(third_stage);
+			}
+		});
+		
+		btn_re.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				sub.coin_label_set(id, label_coin);
+				sub.point_set(id, label_point);
+				sub.membership_set(id, label_membership);
+				
 			}
 		});
 

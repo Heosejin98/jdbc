@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="main_stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="1025.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GuestMainViewController">
+<AnchorPane fx:id="main_stage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="1025.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GuestMainViewController">
    <children>
       <Text layoutX="31.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiter" wrappingWidth="134.9830722808838">
          <font>
@@ -23,5 +23,9 @@
          <children>
             <AnchorPane fx:id="third_stage" layoutX="-14.0" prefHeight="475.0" prefWidth="813.0" />
          </children></AnchorPane>
+      <Label fx:id="label_point" layoutX="554.0" layoutY="28.0" prefHeight="29.0" prefWidth="148.0" text="POINT : " />
+      <Label fx:id="label_coin" layoutX="396.0" layoutY="33.0" prefHeight="22.0" prefWidth="117.0" text="COIN :" />
+      <Label fx:id="label_membership" layoutX="180.0" layoutY="33.0" prefHeight="22.0" prefWidth="188.0" text="MEMBERSHIP : " />
+      <Button fx:id="btn_re" layoutX="31.0" layoutY="513.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="128.0" style="-fx-background-color: rgb(0,153,255);" stylesheets="@../styles/button.css" text="새로고침" textFill="WHITE" />
    </children>
 </AnchorPane>
