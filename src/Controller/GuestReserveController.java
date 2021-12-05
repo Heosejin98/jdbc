@@ -171,9 +171,9 @@ public class GuestReserveController implements Initializable {
 			@Override
 			public void handle(MouseEvent event) {
 				List<String> ListOrdercheck = list_ordercheck.getItems();
-				gd.store_reservation(s_key, g_key, datepickervalue, price, re_time);
+				int ordernum = gd.store_reservation(s_key, g_key, datepickervalue, price, re_time);
 				for(int i=0; i<ListOrdercheck.size(); i++) {
-					gd.Order_M_insert(ListOrdercheck.get(i), g_key, s_key);
+					gd.Order_M_insert(ListOrdercheck.get(i), g_key, s_key, ordernum);
 					System.out.println("gKey"+ ListOrdercheck.get(i));
 					System.out.println("gKey"+ g_key + "s_key" + s_key);
 				}

@@ -5,9 +5,12 @@ import javafx.collections.FXCollections;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import DB.GuestDB;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -67,10 +70,21 @@ public class GuestReviewController implements Initializable{
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          
-    
-
-  
+         
+    	GuestDB gd = new GuestDB();
+    	
+    	String id = IntroViewController.getField;
+    	ObservableList<String> R_List= FXCollections.observableArrayList(); // 배열화
+    	int g_key = gd.getguestkey(id);
+    	int s_key = gd.storekey_val(g_key);
+    	System.out.println(g_key);
+    	
+    	List<String> Review_List = new ArrayList<>();
+    	Review_List = gd.getReviewStoreNameList(g_key);
+		for (int i = 0; i < Review_List.size(); i++) {
+			R_List.add(Review_List.get(i));
+		}
+		list_reviewstorename.setItems(R_List);
         
         
     StoreScore.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
@@ -88,7 +102,17 @@ public class GuestReviewController implements Initializable{
             @Override
             public void handle(MouseEvent event) {
                
-          
+            	 Review= textarea1_review.getText();	
+            	 gd.signUpreview(s_key, id, Review, score, g_key);
+            	 
+            		ObservableList<String>  R_List= FXCollections.observableArrayList(); // 배열화
+            		List<String> Review_List = new ArrayList<>();
+                	Review_List = gd.getReviewStoreNameList(g_key);
+            		for (int i = 0; i < Review_List.size(); i++) {
+            			R_List.add(Review_List.get(i));
+            		}
+            		list_reviewstorename.setItems(R_List);
+                    
               
         
             }
@@ -100,6 +124,7 @@ public class GuestReviewController implements Initializable{
                 Object obj = list_reviewstorename.getSelectionModel().getSelectedItem();
                 label_reviewstorename.setText(obj.toString());
                 
+               
                 }
         });
      }

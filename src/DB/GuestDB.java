@@ -2,11 +2,14 @@ package DB;
 
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Controller.sub;
+import List.OrderInfoList;
+import List.StoreList;
 
 public class GuestDB extends DTO {
 
@@ -39,8 +42,85 @@ public class GuestDB extends DTO {
 		return list;
 
 	}
+	/**
+	 * @메서드이름 : getReviewStoreNameList
+	 * @작성날짜 : 21.12.05
+	 * @용도 : 리뷰 쓸  매장 이름 출력
+	 * @author 허세진
+	 */
+	public ArrayList<String> getReviewStoreNameList(int g_key) {
 
+		ArrayList<String> list = new ArrayList<>();
 
+		try {
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			sql = "select storename from order_t ot JOIN store s on (s.storekey = ot.sto_key)"
+					+ " where guest_key = ? and check_key = 2";
+			st = conn.prepareStatement(sql);
+			st.setInt(1, g_key);
+			rs = st.executeQuery();
+			String value = "";
+			while (rs.next()) {
+				value = rs.getString(1);
+				list.add(value);
+			}
+			closeDB();
+
+		} catch (SQLException e) {
+
+			System.out.println("DB 로드 실패" + e);
+		}
+		return list;
+
+	}
+
+	
+	public ArrayList<String> GetOrderMenuList(int g_key, int s_key, int ord_num) {
+
+		ArrayList<String> list = new ArrayList<>();
+
+		try {
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			sql = "select menuname from order_menu where guest_key = ? and store_key = ? and ord_num = ?";
+			st = conn.prepareStatement(sql);
+			st.setInt(1, g_key);
+			st.setInt(2, s_key);
+			st.setInt(3, ord_num);
+			rs = st.executeQuery();
+			String value = "";
+			while (rs.next()) {
+				value = rs.getString(1);
+				list.add(value);
+			}
+			closeDB();
+
+		} catch (SQLException e) {
+			System.out.println("메뉴 출력 실패 " + e);
+		}
+		return list;
+
+	}
+	
+	public int storekey_val(int g_key) {
+		int value = 0;
+
+		try {
+			sql = "select sto_key from order_t where guest_key = " + g_key;
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			value = rs.getInt(1);
+			closeDB();
+			
+			return value;
+		} catch (SQLException e) {
+			// TODO 자동 생성된 catch 블록
+			System.out.println("storeKey 로드 실패" + e);
+			return value;
+		}
+
+	}
 
 	/**
 	 * @메서드이름 : getStoreCloseTime
@@ -146,7 +226,7 @@ public class GuestDB extends DTO {
 	}
 	
 	// order_t check_key = 1 결제전 / 2 결제후
-	public void store_reservation(int s_key, int g_key,
+	public int store_reservation(int s_key, int g_key,
 			LocalDate resv_date,  int cost, int time) { // in
 								
 		Date date = new Date(0);
@@ -166,23 +246,27 @@ public class GuestDB extends DTO {
 			cstmt.setInt(6, time);
 			cstmt.setInt(7, 1);
 			cstmt.executeQuery();
-			
+		    
 			closeDB();
 		} catch (SQLException e) {
 			System.out.println("예약 테이블 생성 실패" + e);
 		}
+		
+		return max;
 	}
 	
-	public void Order_M_insert(String name, int guest_key, int store_key) {
+	
+	public void Order_M_insert(String name, int guest_key, int store_key, int order_num) {
 		try {
 			conn = DriverManager.getConnection(Uri, Id, Pw);
-			sql = "insert into order_menu(menuname, guest_key, store_key)";
-			sql += "values(?, ?, ?)";
+			sql = "insert into order_menu(menuname, guest_key, store_key, ord_num)";
+			sql += "values(?, ?, ?, ?)";
 
 			st = conn.prepareStatement(sql);
 			st.setString(1, name);	
 			st.setInt(2, guest_key);
 			st.setInt(3, store_key);
+			st.setInt(4, order_num);
 			rs = st.executeQuery();
 			closeDB();
 
@@ -212,6 +296,42 @@ public class GuestDB extends DTO {
 		}
 	}
 	
+	/**
+	 * @메서드이름 : getOrderInfo
+	 * @작성날짜 : 21.12.05
+	 * @용도 : 예약 정보 불러오기
+	 * @author 허세진
+	 */
+	public ArrayList<OrderInfoList> getOrderInfo(int s_key, int g_key) {
+
+		ArrayList<OrderInfoList> list = new ArrayList<>();
+		String s_name = null;
+		Date ord_date = null;
+		int time = 0;
+
+		try {
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			sql = "select storename, ord_date, ord_time from order_t ot JOIN store s on (s.storekey = ot.sto_key) "
+					+ "where guest_key = ? and sto_key = ? and check_key = 1";
+			st = conn.prepareStatement(sql);
+			st.setInt(1, g_key);
+			st.setInt(2, s_key);
+			rs = st.executeQuery();
+
+			while (rs.next()) {
+				s_name = rs.getString(1);
+				ord_date = rs.getDate(2);
+				time = rs.getInt(3);
+				list.add(new OrderInfoList(s_name, ord_date, time));
+			}
+
+			closeDB();
+		} catch (SQLException e) {
+			System.out.println("예약 정보 로드 실패" + e);
+		}
+		return list;
+	}
+
 
 	
 	public int getguestkey(String id) {
@@ -256,6 +376,34 @@ public class GuestDB extends DTO {
 			System.out.println("가격 정보 가져오기 실패" + e);
 		}
 		return price;
+	}
+	
+	public void signUpreview(int s_key, String id, String post , int rating, int g_key) {
+		try {
+			
+			
+			
+			conn = DriverManager.getConnection(Uri, Id, Pw);
+			sql = "insert into review(stokey, id, post, ratings) "
+					+ "values(?, ?, ?, ?)";
+			st = conn.prepareStatement(sql);
+			st.setInt(1, s_key);	
+			st.setString(2, id);
+			st.setString(3, post);
+			st.setInt(4, rating);
+			rs = st.executeQuery();
+			
+			PreparedStatement pstmt2 = conn.prepareStatement("update order_t set check_key = 3 "
+					+ "where sto_KEY = ? and guest_key = ?");
+			pstmt2.setInt(1, s_key);
+			pstmt2.setInt(2, g_key);
+			rs = pstmt2.executeQuery();
+			
+			closeDB();
+
+		} catch (SQLException e) {
+			System.out.println("리뷰 등록 실패" + e);
+		}
 	}
 
 }

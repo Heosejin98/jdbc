@@ -17,6 +17,9 @@ import java.util.logging.Logger;
 
 import DB.CancelTx;
 import DB.GuestDB;
+import DB.StoreDB;
+import List.OrderInfoList;
+import List.StoreList;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,8 +46,7 @@ public class GuestReserveInfoController implements Initializable{
     
     @FXML
     private Button btn_cancel;
-    @FXML
-    private Label label_waitperson;
+  
     @FXML
     private Label label_waittime;
     @FXML
@@ -64,16 +66,46 @@ public class GuestReserveInfoController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-    	GuestDB ld = new GuestDB();
+    	GuestDB gd = new GuestDB();
+    	StoreDB sd = new StoreDB();
     	CancelTx TX = new CancelTx();
+    	
+    	ObservableList<String> MenuList = FXCollections.observableArrayList();
+    	
     	String id = IntroViewController.getField;
-    	int g_key = ld.getguestkey(id);
+    	String time = "";
+    	String date = "";
+    	String storename = "";
+    	int g_key = gd.getguestkey(id);
+    	int s_key = gd.storekey_val(g_key);
+    	int ordnum = sd.get_ord_num(s_key, g_key);
+    	List<OrderInfoList> Store_List = new ArrayList<>();
+    
+    	System.out.println(g_key);
+    	System.out.println(s_key);
+    	System.out.println(ordnum);
+    	//가게 정보, 예약 정보 출력
+    	
+    	Store_List = gd.getOrderInfo(s_key, g_key);
+    	System.out.println("안나옴?" + Store_List.get(0).getStorename());
+    	label_store.setText(Store_List.get(0).getStorename());
+    	label_date.setText((Store_List.get(0).getDate()).toString());
+    	label_time.setText(Integer.toString(Store_List.get(0).getTime()));
+    	
+    	//메뉴 출력
+    	List<String> M_List = new ArrayList<>();
+		M_List = sd.GetOrderMenuList(g_key, s_key, ordnum);
+		for (int i = 0; i < M_List.size(); i++) {
+			MenuList.add(M_List.get(i));
+		}
+		list_reservationmenu.setItems(MenuList);
+		
     	btn_cancel.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				
 				TX.getCost(g_key);
-				ld.cancel_res(g_key);
+				gd.cancel_res(g_key);
 			}
 		});
         
